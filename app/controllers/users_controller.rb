@@ -19,4 +19,10 @@ class UsersController < ApplicationController
   
   def destroy
   end
+  
+  private
+  
+  def user_params
+    return params.require(:user).permit(:id, :name, :join_date)
+  end
 end
