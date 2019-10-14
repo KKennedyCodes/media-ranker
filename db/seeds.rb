@@ -1,39 +1,39 @@
 require 'csv'
 
-MEDIA_FILE = Rails.root.join('db', 'seed_data', 'media-seeds.csv')
-puts "Loading raw media data from #{MEDIA_FILE}"
+WORK_FILE = Rails.root.join('db', 'media-seeds.csv')
+puts "Loading raw work data from #{WORK_FILE}"
 
-media_failures = []
-CSV.foreach(MEDIA_FILE, :headers => true) do |row|
-  media = Media.new
-  media.title = row['title']
-  media.category = row['category']
-  media.create = row['creator']
-  media.publication_year = row['publication_year']
-  media.description = row['description']
-  successful = media.save
+work_failures = []
+CSV.foreach(WORK_FILE, :headers => true) do |row|
+  work = Work.new
+  work.title = row['title']
+  work.category = row['category']
+  work.creator = row['creator']
+  work.publication_year = row['publication_year']
+  work.description = row['description']
+  successful = work.save
   
   if !successful
-    media_failures << media
-    puts "Failed to save media: #{media.inspect}"
+    work_failures << work
+    puts "Failed to save work: #{work.inspect}"
   else
-    puts "Created media: #{media.inspect}"
+    puts "Created work: #{work.inspect}"
   end
 end
 
-puts "Added #{Media.count} media records"
-puts "#{media_failures.length} medias failed to save"
+puts "Added #{Work.count} work records"
+puts "#{work_failures.length} works failed to save"
 
 
 
-USER_FILE = Rails.root.join('db', 'seed_data', 'user-seeds.csv')
+USER_FILE = Rails.root.join('db', 'user-seeds.csv')
 puts "Loading raw user data from #{USER_FILE}"
 
 user_failures = []
 CSV.foreach(USER_FILE, :headers => true) do |row|
   user = User.new
   user.name = row['name']
-  user.join_date = row['join_date']
+  user.join_date = Time.now
   successful = user.save
   if !successful
     user_failures << user
