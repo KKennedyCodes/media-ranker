@@ -10,4 +10,13 @@ class Work < ApplicationRecord
     upvotes = Vote.where(work_id: work_id)
     return upvotes.count
   end
+  
+  def self.spotlight
+    vote_count = {}
+    @works.each do |work|
+      vote_count[:work.title] => total_votes(work.id)
+    end)
+    top_work = hash.key(hash.values.max)
+    return top_work
+  end
 end
