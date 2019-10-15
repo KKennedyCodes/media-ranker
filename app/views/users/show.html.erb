@@ -7,22 +7,30 @@
 <p><%= link_to "Delete User", user_path(@user), method: :delete, data: {confirm: "Are you sure?"}%></p>
 
 <h2>Vote Log</h2>
-<div class="data_table" class="6_col_data_table">
-<div class="data_header_1">Vote ID</div>
-<div class="data_header_2">Category</div>
-<div class="data_header_3">Title</div>
-<div class="data_header_4">Creator</div>
-<div class="data_header_5">Upvote Date</div>
-<div class="data_header_6">DELETE</div>
-<% @user.votes.each do |vote| %>
-<div class="data_point_1"><%= vote.id %></div>
-<div class="data_point_2"><%= (vote.work.category).capitalize %></div>
-<div class="data_point_3"><%= vote.work.title %></div>
-<div class="data_point_4"><%= vote.work.creator %></div>
-<div class="data_header_5"><%= vote.date%></div>
-<div class="data_point_6"><%= link_to "Delete Vote", vote_path(vote.id), method: :delete, data: {confirm: "Are you sure?"}%></div>
-<% end %>
-</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Vote ID</th>
+      <th scope="col">Category</th>
+      <th scope="col">Title</th>
+      <th scope="col">Creator</th>
+      <th scope="col">Vote Date</th>
+      <th scope="col">DELETE</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @user.votes.each do |vote| %>
+    <tr> 
+      <td><%= vote.id %></td>
+      <td><%= (vote.work.category).capitalize %></td>
+      <td><%= link_to vote.work.title, work_path(vote.work) %></td>
+      <td><%= vote.work.title %></td>
+      <td><%= vote.date%></td>
+      <td><%= link_to "Delete Vote", vote_path(vote.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
 
 <p><%= link_to "Return to User List", users_path %></p>
-
