@@ -6,6 +6,8 @@
       <th scope="col">Name</th>
       <th scope="col">Join Date</th>
       <th scope="col">Upvote Count</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +17,8 @@
       <td><%= link_to user.name, user_path(user) %></td>
       <td><%= user.join_date %></td>
       <td><%= user.total_votes(user.id) %></td>
+      <td><%= link_to "Edit", edit_user_path(user.id) %></td>
+      <td><%= link_to "Delete", user_path(user.id), method: :delete, data: {confirm: "Are you sure?"}%></td>
     </tr>
   <% end %>
   </tbody>

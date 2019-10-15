@@ -7,7 +7,29 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link rel="icon" type="image/png" href="/assets/icon.ico">
   </head>
+  <header>
+  <h1>Media Ranker</h1>
+  <h2>Ranking the Best of Everything</h2>
+  </header>
+  <nav class="nav">
+  <%= link_to "View Top Media", root_path %>
+  <%= link_to "View All Media", works_path %>
+  <%= link_to "Add a New Media", new_work_path %>
+  <%= link_to "View All Users", users_path %>
+  <% if session[:user_id].nil? %>
+      <%= link_to "Login", login_path %>
+    <% else %>
+      Logged in as <%= session[:user_id] %>
+      <%= link_to "Logout", logout_path, method: :post%>
+    <% end %>
+  </nav>
+  <aside class="login_info">
+    
+    
+  </aside>
     <section class="flash">
     <% flash.each do |name, message| %>
       <div class="<%= name %>"><%= message %></div>
