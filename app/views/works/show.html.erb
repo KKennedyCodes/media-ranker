@@ -1,0 +1,30 @@
+<h2>ID: <%= @work.id %></h2>
+<h2>Title: <%= @work.title %></h2>
+<h2>Creator: <%= @work.creator %></h2>
+<h3>Category: <%= @work.category %></h3>
+<h3>Publication Year: <%= @work.publication_year %></h3>
+<p>Description: <%= @work.description %></p>
+<h3>Total Upvotes: <%= @work.total_votes(@work.id) %></h3>
+
+<p><%= link_to "Delete Work", work_path(@work), method: :delete, data: {confirm: "Are you sure?"}%></p>
+
+<h2>Vote Log</h2>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">User</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @work.votes.each do |vote| %>
+    <tr>  
+      <td><%= vote.user.name %></td>
+      <td><%= vote.date%></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<p><%= link_to "Return to Works List", works_path %></p>
