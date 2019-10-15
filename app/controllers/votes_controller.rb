@@ -1,8 +1,15 @@
 class VotesController < ApplicationController
   def index
+    @votes = Vote.all
   end
   
   def show
+    vote_id = params[:id]
+    @vote = Vote.find_by(id: vote_id)
+    if @vote.nil?
+      head :not_found
+      return
+    end
   end
   
   def new

@@ -1,0 +1,11 @@
+<h1 class="data_table">Users</h1>
+<div class="data_header">User ID</div>
+<div class="data_header">Name</div>
+<div class="data_header">Join Date</div>
+<div class="data_header">Upvote Count</div>
+<% @users.each do |user| %>
+<div class="data_point"><%= user.id %></div>
+<div class="data_point"><%= user.name %></div>
+<div class="data_point"><%= user.join_date %></div>
+<div class="data_point"><%= user.total_votes(user.id) %></div>
+<% end %>

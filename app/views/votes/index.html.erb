@@ -1,0 +1,11 @@
+<h1 class="data_table" id="vote_data_table">Votes</h1>
+<div class="data_header_1">Vote ID</div>
+<div class="data_header_2">User</div>
+<div class="data_header_3">Work</div>
+<div class="data_header_4">Date</div>
+<% @votes.each do |vote| %>
+<div class="data_point_1"><%= vote.id %></div>
+<div class="data_point_2"><%= vote.user.name %></div>
+<div class="data_poin_3"><%= vote.work.title %></div>
+<div class="data_point_4"><%= vote.date %></div>
+<% end %>

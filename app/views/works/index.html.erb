@@ -1,0 +1,14 @@
+<h1 class="data_table">Works</h1>
+<div class="data_header">Works ID</div>
+<div class="data_header">Category</div>
+<div class="data_header">Title</div>
+<div class="data_header">Creator</div>
+<div class="data_header">Publication Year</div>
+<div class="data_header">Description</div>
+<% @works.each do |work| %>
+<div class="data_point"><%= work.id %></div>
+<div class="data_point"><%= work.title %></div>
+<div class="data_point"><%= work.creator %></div>
+<div class="data_point"><%= work.publication_year %></div>
+<div class="data_point"><%= work.description %></div>
+<% end %>
