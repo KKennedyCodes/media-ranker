@@ -17,13 +17,13 @@ class UsersController < ApplicationController
   end
   
   def login
-    username = params[:user][:username]
-    user = User.find_by(username: username)
+    username = params[:user][:name]
+    user = User.find_by(name: username)
     if user
       session[:user_id] = user.id
       flash[:success] = "Successfully logged in as returning user #{username}"
     else
-      user = User.create(username: username)
+      user = User.create(name: username)
       session[:user_id] = user.id
       flash[:success] = "Successfully logged in as new user #{username}"
     end
