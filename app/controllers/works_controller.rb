@@ -1,6 +1,7 @@
 class WorksController < ApplicationController
   
   before_action :find_work, only: [:show, :edit, :update]
+  before_action :work_not_found, only: [:show, :edit, :destroy]
   
   def index
     @works = Work.all
@@ -9,12 +10,7 @@ class WorksController < ApplicationController
     @movies = @works.where(category: "movie")
   end
   
-  def show
-    if @work.nil?
-      head :not_found
-      return
-    end
-  end
+  def show;  end
   
   def new
     @work = Work.new
@@ -37,13 +33,7 @@ class WorksController < ApplicationController
     end
   end
   
-  def edit
-    if @work.nil?
-      redirect_to work_path
-      head :not_found
-      return
-    end
-  end
+  def edit; end
   
   def update
     #Handle Validation Errors
@@ -60,14 +50,8 @@ class WorksController < ApplicationController
     end
   end
   
-  def destroy
-    if @work.nil?
-      head :not_found
-      return
-    end
-    
+  def destroy    
     @work.destroy
-    
     redirect_to works_path
     return
   end
@@ -86,5 +70,13 @@ class WorksController < ApplicationController
   
   def find_work
     @work = Work.find_by(id: params[:id])
+  end
+  
+  def work_not_found
+    if @work.nil?
+      flash[:error] = "Work with ID: #{params[:id]} was not found."
+      redirect_to root_path
+      return
+    end
   end
 end
