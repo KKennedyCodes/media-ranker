@@ -10,4 +10,3 @@ dresses_vote:
   user_id: 2
   work_id: 3
   date: Time.now
-   
