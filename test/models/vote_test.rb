@@ -14,18 +14,19 @@ describe Vote do
     end
   end
   
-  # describe "validations" do
-  #   it "requies name to be instantiated" do
-  #     @user.name = nil
-  #     expect(@user.valid?).must_equal false
-  #     expect(@user.errors.messages).must_include :name    
-  #   end
-  
-  #   it "requies a unique name to be instantiated" do
-  #     user_2 = User.new(name: "Katie Kennedy", join_date: Time.now)
-  #     expect(user_2.valid?).must_equal false      
-  #   end
-  # end
+  describe "validations" do
+    it "requies work_id to be instantiated" do
+      @vote.work_id = nil
+      expect(@vote.valid?).must_equal false
+      expect(@vote.errors.messages).must_include :work_id   
+    end
+    
+    it "requies user_id to be instantiated" do
+      @vote.user_id = nil
+      expect(@vote.valid?).must_equal false
+      expect(@vote.errors.messages).must_include :user_id   
+    end
+  end
   
   # describe "relations" do
   # end

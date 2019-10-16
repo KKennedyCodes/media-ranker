@@ -1,16 +1,12 @@
 class UsersController < ApplicationController
+  before_action :find_user, only: [:show, :edit, :update]
+  before_action :user_not_found, only: [:show, :edit, :destroy]
+  
   def index
     @users = User.all
   end
   
-  def show
-    user_id = params[:id]
-    @user = User.find_by(id: user_id)
-    if @user.nil?
-      head :not_found
-      return
-    end
-  end
+  def show; end
   
   def login_form
     @user = User.new
@@ -60,23 +56,9 @@ class UsersController < ApplicationController
     end
   end
   
-  def edit
-    @user = User.find_by(id: params[:id])
-    if @user.nil?
-      redirect_to user_path
-      head :not_found
-      return
-    end
-  end
+  def edit; end
   
   def update
-    #Handle Validation Errors
-    @user = User.find_by(id: params[:id])
-    if @user.nil? 
-      head :not_found
-      return
-      #anytime we do a head or render or redirect
-    end
     if @user.update(user_params)
       redirect_to user_path(@user.id)
       return
@@ -86,16 +68,7 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    user_id = params[:id]
-    @user = User.find_by(id: user_id)
-    
-    if @user.nil?
-      head :not_found
-      return
-    end
-    
     @user.destroy
-    
     redirect_to users_path
     return
   end
@@ -106,4 +79,15 @@ class UsersController < ApplicationController
     return params.require(:user).permit(:id, :name, :join_date)
   end
   
+  def find_user
+    @user = User.find_by(id: params[:id])
+  end
+  
+  def user_not_found
+    if @user.nil?
+      flash[:error] = "User with ID: #{params[:id]} was not found."
+      redirect_to root_path
+      return
+    end
+  end
 end

@@ -36,12 +36,6 @@ class WorksController < ApplicationController
   def edit; end
   
   def update
-    #Handle Validation Errors
-    if @work.nil? 
-      head :not_found
-      return
-      #anytime we do a head or render or redirect
-    end
     if @work.update(work_params)
       redirect_to work_path(@work.id)
       return
