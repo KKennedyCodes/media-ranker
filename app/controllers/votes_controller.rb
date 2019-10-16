@@ -15,11 +15,12 @@ class VotesController < ApplicationController
   
   def create
     @vote = Vote.new(vote_params)
-    if vote.save
+    if @vote.save
       redirect_to votes_path
       return
     else
       render :new
+      return
     end
   end
   
@@ -28,29 +29,33 @@ class VotesController < ApplicationController
   def update
     if @vote.update(vote_params)
       redirect_to vote_path(@vote.id)
-    end
-    
-    def destroy
-      @vote.destroy
-      redirect_to votes_path
-    end
-    
-    private
-    
-    def vote_params
-      return params.require(:vote).permit(:id, :work_id, :user_id, :date)
-    end
-    
-    def find_vote
-      @vote = Vote.find_by(id: params[:id])
-    end
-    
-    def vote_not_found
-      if @vote.nil?
-        flash[:error] = "Vote with ID: #{params[:id]} was not found."
-        redirect_to root_path
-        return
-      end
+      return
+    else
+      render user_path
+      return
     end
   end
   
+  def destroy
+    @vote.destroy
+    redirect_to votes_path
+  end
+  
+  private
+  
+  def vote_params
+    return params.require(:vote).permit(:id, :work_id, :user_id, :date)
+  end
+  
+  def find_vote
+    @vote = Vote.find_by(id: params[:id])
+  end
+  
+  def vote_not_found
+    if @vote.nil?
+      flash[:error] = "Vote with ID: #{params[:id]} was not found."
+      redirect_to root_path
+      return
+    end
+  end
+end

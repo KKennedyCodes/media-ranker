@@ -1,6 +1,6 @@
 require "test_helper"
 
-describe ApplicationHelper do
+describe ApplicationHelper, :helper do
   describe 'readable_date' do
     it "produces a tag with the full timestamp" do
       date = Date.today - 14
