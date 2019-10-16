@@ -1,0 +1,6 @@
+kennedy:
+  name: Katie Kennedy
+  date_joined: Time.now
+gaga:
+  name: Lady Gaga
+  date_joined: Time.now

@@ -1,0 +1,13 @@
+pill_vote:
+  user_id: 1
+  work_id: 1
+  date: Time.now
+peppers_vote:
+  user_id: 1
+  work_id: 2
+  date: Time.now
+dresses_vote:
+  user_id: 2
+  work_id: 3
+  date: Time.now
+   
