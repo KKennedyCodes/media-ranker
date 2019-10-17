@@ -6,9 +6,9 @@
   </div>
   <div class="card-body">
     <% top_ranker = Work.spotlight%>
-    <h5 class="card-title"><%= top_ranker.title %></h5>
+    <h4 class="card-title"><%= top_ranker.title %></h4>
     <p class="card-text"><%= top_ranker.description %></p>
-    <%= link_to "View Details", work_path(top_ranker) %>
+    <%= link_to '<button type="button" class="btn btn-primary">View Details</button>'.html_safe, work_path(top_ranker) %>
   </div>
 </div>
 </section>
