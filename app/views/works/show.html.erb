@@ -1,14 +1,23 @@
-<h2>ID: <%= @work.id %></h2>
-<h2>Title: <%= @work.title %></h2>
-<h2>Creator: <%= @work.creator %></h2>
-<h3>Category: <%= @work.category %></h3>
-<h3>Publication Year: <%= @work.publication_year %></h3>
-<p>Description: <%= @work.description %></p>
-<h3>Total Upvotes: <%= @work.total_votes %></h3>
+<h1><%= @work.title %></h1>
+<h2><%= @work.creator %></h2>
+<td></td>
+</tr>
+<tr>
+<td rowspan="2"><p><%= @work.description %></p></td>
+<td><p><%= (@work.category).capitalize %></p></td>
+</tr>
+<tr>
+<td><p>Publication Year: <%= @work.publication_year %></p></td>
+</tr>
+</table>
+</section>
+<%= link_to '<button type="button" class="btn btn-primary">Back to Works</button>'.html_safe, works_path %>
+<%= link_to '<button type="button" class="btn btn-primary">Edit</button>'.html_safe, edit_work_path %>
+<%= link_to '<button type="button" class="btn btn-primary">Upvote</button>'.html_safe, vote_path(@work.id), method: :post %>
+<%= link_to '<button type="button" class="btn btn-primary">Delete</button>'.html_safe, work_path(@work), method: :delete, data: {confirm: "Are you sure?"}%>
 
-<p><%= link_to "Delete Work", work_path(@work), method: :delete, data: {confirm: "Are you sure?"}%></p>
 
-<h2>Vote Log</h2>
+<h2>Vote Log - Total Votes: <%= @work.total_votes %></h2>
 
 <table class="table table-hover">
   <thead>

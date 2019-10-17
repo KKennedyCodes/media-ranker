@@ -10,7 +10,18 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="/assets/icon.ico">
   </head>
-  <section class="header_image">
+    <section class="header_image">
+  <nav class="nav loginout">
+  <% if session[:user_id].nil? %>
+      <%= link_to "Login", login_path %>
+    <% else %>
+    <% user = User.find(session[:user_id])%>
+    <section class="login_info">
+      <h5>Logged in as <%= user.name %></h5>
+    </section>
+      <%= link_to "Logout", logout_path, method: :post%>
+    <% end %>
+  </nav>
     <header>
     <h1>Media Ranker</h1>
     <h2>Ranking the Best of Everything</h2>
@@ -21,12 +32,6 @@
   <%= link_to "View All Media", works_path %>
   <%= link_to "Add a New Media", new_work_path %>
   <%= link_to "View All Users", users_path %>
-  <% if session[:user_id].nil? %>
-      <%= link_to "Login", login_path %>
-    <% else %>
-      Logged in as <%= session[:user_id] %>
-      <%= link_to "Logout", logout_path, method: :post%>
-    <% end %>
   </nav>
 </section>
     <section class="flash">

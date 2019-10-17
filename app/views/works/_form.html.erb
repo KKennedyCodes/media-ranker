@@ -8,19 +8,28 @@
     <% end %>
   </ul>
 <% end %>
-
-<p>Please provide the following information to <%= verb_name %> a work to our database:</p>
+<h1><%= (verb_name).capitalize %> Work</h1>
+<p class="info_p">Please provide the following information to <%= verb_name %> a work to our database:</p>
 
 <%= form_with model: @work, class: 'create-work' do |f| %>
+<section class="form_table">
   <%= f.label :category %>
   <%= f.select :category, ['album', 'book', 'movie']%>
+
   <%= f.label :title %>
   <%= f.text_field :title %>
+
   <%= f.label :creator %>
   <%= f.text_field :creator %>
+
   <%= f.label :publication_year %>
   <%= f.number_field :publication_year, :max => 9999, :min => 0000 %>
+
   <%= f.label :description %>
   <%= f.text_field :description %>
+  
+  <div></div>
   <%= f.submit "Save Work" %>
+  </section>
 <% end %>
+</div>
