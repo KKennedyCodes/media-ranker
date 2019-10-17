@@ -7,13 +7,14 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
+    <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="/assets/icon.ico">
   </head>
-  <header>
-  <h1>Media Ranker</h1>
-  <h2>Ranking the Best of Everything</h2>
-  </header>
+  <section class="header_image">
+    <header>
+    <h1>Media Ranker</h1>
+    <h2>Ranking the Best of Everything</h2>
+    </header>
   
   <nav class="nav">
   <%= link_to "View Top Media", root_path %>
@@ -27,10 +28,7 @@
       <%= link_to "Logout", logout_path, method: :post%>
     <% end %>
   </nav>
-  <aside class="login_info">
-    
-    
-  </aside>
+</section>
     <section class="flash">
     <% flash.each do |name, message| %>
       <div class="<%= name %>"><%= message %></div>

@@ -1,47 +1,45 @@
 <br />
 <section id="top_work">
 <div class="card text-center">
-  <div class="card-header">
-    Top Voted Work
+  <div class="card-header spotlight">
+    SPOTLIGHT
   </div>
   <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">View</a>
-  </div>
-  <div class="card-footer text-muted">
-    2 days ago
+    <% top_ranker = Work.spotlight%>
+    <h5 class="card-title"><%= top_ranker.title %></h5>
+    <p class="card-text"><%= top_ranker.description %></p>
+    <%= link_to "View Details", work_path(top_ranker) %>>
   </div>
 </div>
 </section>
 <br />
 <section class="top_ten">
 <div class="card-deck">
+
   <div class="card" style="width: 18rem;">
-  
-    <div class="card-header">
-      Top Albums
+    <div class="card-header" >
+      Top Books
     </div>
-    
-    <li class="list-group list-group-flush">
-      <li class="list-group-item">Cras justo odio</li>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><%= @works.first.title %></li>
       <li class="list-group-item">Dapibus ac facilisis in</li>
       <li class="list-group-item">Vestibulum at eros</li>
-    </li>
+    </ul>
   </div>
+
   <div class="card" style="width: 18rem;">
     <div class="card-header">
       Top Books
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Cras justo odio</li>
+      <li class="list-group-item"><%= @works.first.title %></li>
       <li class="list-group-item">Dapibus ac facilisis in</li>
       <li class="list-group-item">Vestibulum at eros</li>
     </ul>
   </div>
+
   <div class="card" style="width: 18rem;">
     <div class="card-header">
-    
       Top Movies
     </div>
     <ul class="list-group list-group-flush">

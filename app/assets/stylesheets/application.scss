@@ -17,3 +17,66 @@
     /* Import scss content */
 @import "**/*";
 
+*{
+    font-family: 'Rubik', sans-serif;
+}
+.header_image {
+    background-color: #293462;
+}
+header {
+    padding: 3%;
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: end;
+}
+    h1 {
+        text-align: right;
+        color: #ec9b3b;
+        grid-column: 1;
+        padding-right: 20px;
+
+
+    }
+    h2 {
+        padding-left: 20px;
+        border-left: 3px solid #00818a;
+        text-align: left;
+        color: #f7be16;
+        grid-column: 2;
+        
+    }
+    a {
+        font-size: 1.15em;
+        color: #00818a;
+        text-decoration: none;
+        padding: 15px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    a:hover {
+       color: #ec9b3b; 
+       text-decoration: none;
+       text-emphasis: strong;
+    }
+    .btn-primary {
+        border: 1px solid #00818a;
+        background-color: #00818a;
+    }
+
+    .btn-primary:hover {
+        background-color:#ec9b3b;
+        border: 1px solid #ec9b3b;
+    }
+
+    .spotlight{
+        color: #f7be16;
+        font-size: 1.15em;
+        text-emphasis: strong;
+        background-color:#00818a;
+        border: 1px solid #00818a;
+    }
+
+
+
+
+

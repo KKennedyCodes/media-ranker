@@ -50,10 +50,15 @@ class WorksController < ApplicationController
     return
   end
   
-  def self.top_ten
-    @albums.sort_by!(&:votes)
-    @books.sort_by!(&:votes)
-    @movies.sort_by!(&:votes)
+  def vote(work_id)
+    if user
+      Vote.new(date: Time.now, user_id: session[:user_id], work_id: work_id)
+      flash[:success] = "Upvote Counted"
+      redirect_to works_path
+    else
+      flash[:error] = "Must Be Logged in to Vote"
+      redirect_to works_path
+    end
   end
   
   private

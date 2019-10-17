@@ -8,20 +8,17 @@
       <th scope="col">Created By</th>
       <th scope="col">Published</th>
       <th scope="col">Upvote</th>
-      <th scope="col"># of Views</th>
     </tr>
   </thead>
   <tbody>
   <% @works.each_with_index do |work, index| %>
     <tr> 
-      <td><%= work.total_votes(work.id) %></td>
+      <td><%= work.total_votes %></td>
       <td><%= (work.category).capitalize %></td>
       <td><%= link_to work.title, work_path(work) %></td>
       <td><%= work.creator %></td>
       <td><%= work.publication_year %></td>
-      <td>Upvote</td>
-      <td><%= view_badge_adder(index) %></td>
-   
+      <td>vote</td>
     </tr>
   <% end %>
   </tbody>

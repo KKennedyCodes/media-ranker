@@ -38,6 +38,11 @@ describe Work do
       expect(@work.valid?).must_equal false
       expect(@work.errors.messages).must_include :publication_year   
     end
+    
+    it "requies a unique title to be instantiated" do
+      work_2 = Work.new(category: "album", title: "Jagged Little Pill", creator: "Alanis Morisette", publication_year: 1995, description: "test")
+      expect(work_2.valid?).must_equal false      
+    end
   end
   
   # describe "relations" do
