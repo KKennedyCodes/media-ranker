@@ -29,7 +29,7 @@ header {
     grid-template-columns: auto auto;
     align-items: end;
 }
-    h1 {
+    header > h1 {
         text-align: right;
         color: #ec9b3b;
         grid-column: 1;
@@ -75,6 +75,12 @@ header {
         background-color:#00818a;
         border: 1px solid #00818a;
     }
+h1 {
+    text-align: left;
+    color: #ec9b3b;
+    grid-column: 1;
+    padding-left: 20px;
+}
 
 
 
