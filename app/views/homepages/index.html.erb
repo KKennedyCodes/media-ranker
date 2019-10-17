@@ -8,7 +8,7 @@
     <% top_ranker = Work.spotlight%>
     <h5 class="card-title"><%= top_ranker.title %></h5>
     <p class="card-text"><%= top_ranker.description %></p>
-    <%= link_to "View Details", work_path(top_ranker) %>>
+    <%= link_to "View Details", work_path(top_ranker) %>
   </div>
 </div>
 </section>
@@ -18,12 +18,13 @@
 
   <div class="card" style="width: 18rem;">
     <div class="card-header" >
-      Top Books
+      Top Albums
     </div>
+    <% top_albums = Work.top_ten("album")%>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><%= @works.first.title %></li>
-      <li class="list-group-item">Dapibus ac facilisis in</li>
-      <li class="list-group-item">Vestibulum at eros</li>
+    <% top_albums.each do |album| %>
+      <li class="list-group-item"><%= link_to album.title, work_path(album) %></li>
+      <% end %>
     </ul>
   </div>
 
@@ -31,21 +32,23 @@
     <div class="card-header">
       Top Books
     </div>
+    <% top_books = Work.top_ten("book")%>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><%= @works.first.title %></li>
-      <li class="list-group-item">Dapibus ac facilisis in</li>
-      <li class="list-group-item">Vestibulum at eros</li>
-    </ul>
+      <% top_books.each do |book| %>
+      <li class="list-group-item"><%= link_to book.title, work_path(book) %></li>
+      <% end %>
+      </ul>
   </div>
 
   <div class="card" style="width: 18rem;">
     <div class="card-header">
       Top Movies
     </div>
+    <% top_movies = Work.top_ten("movie")%>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Cras justo odio</li>
-      <li class="list-group-item">Dapibus ac facilisis in</li>
-      <li class="list-group-item">Vestibulum at eros</li>
-    </ul>
+      <% top_movies.each do |movie| %>
+      <li class="list-group-item"><%= link_to movie.title, work_path(movie) %></li>
+      <% end %>
+      </ul>
   </div>
 </div>

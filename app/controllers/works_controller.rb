@@ -5,9 +5,6 @@ class WorksController < ApplicationController
   
   def index
     @works = Work.all
-    @albums = @works.where(category: "album")
-    @books = @works.where(category: "book")
-    @movies = @works.where(category: "movie")
   end
   
   def show;  end
@@ -19,13 +16,6 @@ class WorksController < ApplicationController
   def create
     @work = Work.new(work_params)
     if @work.save
-      if @work.category == "album"
-        @albums << @work
-      elsif @work.category == "book"
-        @books << @work
-      else
-        @movies << @work
-      end
       redirect_to works_path
       return 
     else 
