@@ -1,0 +1,8 @@
+kennedy:
+  id: 1
+  name: Katie Kennedy
+  join_date: Time.now
+gaga:
+  id: 2
+  name: Lady Gaga
+  join_date: Time.now

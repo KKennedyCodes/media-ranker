@@ -4,7 +4,7 @@
 <h3>Category: <%= @work.category %></h3>
 <h3>Publication Year: <%= @work.publication_year %></h3>
 <p>Description: <%= @work.description %></p>
-<h3>Total Upvotes: <%= @work.total_votes(@work.id) %></h3>
+<h3>Total Upvotes: <%= @work.total_votes %></h3>
 
 <p><%= link_to "Delete Work", work_path(@work), method: :delete, data: {confirm: "Are you sure?"}%></p>
 

@@ -5,7 +5,12 @@ class Vote < ApplicationRecord
   validates :user_id, presence: true;
   validates :work_id, presence: true;
   
-  def top_ten(media_type)
+  def sort_by_votes
+    
+  end
+  
+  def top_ten
+    
   end
   
   def spotlight
