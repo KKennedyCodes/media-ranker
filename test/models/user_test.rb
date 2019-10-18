@@ -3,6 +3,7 @@ require "test_helper"
 describe User do
   before do
     @user = users(:kennedy)
+    @user2 = users(:oprah)
     @work = works(:pill)
     @vote = votes(:pill_vote)
   end
@@ -31,10 +32,10 @@ describe User do
   end
   
   describe "custom methods" do
-    # it "totals user votes" do
-    #   vote_total = total_votes(@user.id)
-    #   expect(vote_total).must_equal 2
-    # end
+    it "returns total upvotes contributed by user" do
+      expect(@user.total_votes(@user.id)).must_equal 2
+      expect(@user2.total_votes(@user2.id)).must_equal 0
+    end
   end
 end
 

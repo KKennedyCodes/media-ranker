@@ -3,8 +3,14 @@ require "test_helper"
 describe Work do
   before do
     @user = users(:kennedy)
+    @users = users(:kennedy, :gaga)
+    
     @work = works(:pill)
+    @work2 = works(:kondo)
+    @works = works(:pill, :peppers, :dresses, :kondo)
+    
     @vote = votes(:pill_vote)
+    @votes = votes(:pill_vote, :pill_vote2, :peppers_vote, :dresses_vote)
   end
   
   describe "instantiations" do
@@ -48,11 +54,25 @@ describe Work do
   # describe "relations" do
   # end
   
-  # describe "custom methods" do
-  #   # it "totals user works" do
-  #   #   work_total = total_works(@user.id)
-  #   #   expect(work_total).must_equal 2
-  #   # end
-  # end
+  describe "custom methods" do
+    it "totals votes for a work" do
+      expect(@work.total_votes).must_equal 2
+      expect(@work2.total_votes).must_equal 0
+    end
+    
+    it "sorts the works by category" do
+      expect(Work.top_ten("album").count).must_equal 2
+      expect((Work.top_ten("album").first).id).must_equal 1
+      expect((Work.top_ten("album").last).id).must_equal 2
+    end
+    
+    it "can find the top votes spotlight work" do
+      expect((Work.spotlight).id).must_equal 1
+    end
+    
+  end
 end
+
+
+
 
