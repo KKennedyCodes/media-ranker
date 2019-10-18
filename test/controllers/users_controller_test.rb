@@ -12,7 +12,7 @@ describe UsersController do
       
       get current_user_path
       
-      must_respond_with :success
+      must_respond_with :redirect
     end
     
     it "sets flash[:error] and redirects when there's no user" do

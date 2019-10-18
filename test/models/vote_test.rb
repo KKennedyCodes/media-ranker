@@ -38,6 +38,16 @@ describe Vote do
     it "can relate work_id and user_id to vote" do
       expect(@vote.work_id).must_equal @work.id
       expect(@vote.user_id).must_equal @user.id
+      
+      user = User.create!(name: "Tom Brady", join_date: Time.now)
+      work = Work.create!(category: "book", title: "Where the Sidewalk Ends", creator: "Shel Silverstein", publication_year: 1992)
+      vote = Vote.create!(work_id: work.id, user_id: user.id, date: Time.now)
+      
+      expect(vote.work_id).must_equal work.id
+      expect(vote.user_id).must_equal user.id
+      
+      expect(vote.work).must_equal work
+      expect(vote.user).must_equal user
     end
   end
   
