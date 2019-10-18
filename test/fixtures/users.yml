@@ -6,3 +6,7 @@ gaga:
   id: 2
   name: Lady Gaga
   join_date: Time.now
+oprah:
+  id: 3
+  name: Oprah Winfrey
+  join_date: Time.now

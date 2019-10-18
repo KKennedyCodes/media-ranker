@@ -3,6 +3,11 @@ pill_vote:
   user_id: 1
   work_id: 1
   date: Time.now
+pill_vote2:
+  id: 4
+  user_id: 2
+  work_id: 1
+  date: Time.now
 peppers_vote:
   id: 2
   user_id: 1

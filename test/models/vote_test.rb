@@ -3,8 +3,14 @@ require "test_helper"
 describe Vote do
   before do
     @user = users(:kennedy)
+    @users = users(:kennedy, :gaga)
+    
     @work = works(:pill)
+    @work2 = works(:kondo)
+    @works = works(:pill, :peppers, :dresses, :kondo)
+    
     @vote = votes(:pill_vote)
+    @votes = votes(:pill_vote, :pill_vote2, :peppers_vote, :dresses_vote)
   end
   
   describe "instantiations" do
@@ -28,13 +34,11 @@ describe Vote do
     end
   end
   
-  # describe "relations" do
-  # end
+  describe "relations" do
+    it "can relate work_id and user_id to vote" do
+      expect(@vote.work_id).must_equal @work.id
+      expect(@vote.user_id).must_equal @user.id
+    end
+  end
   
-  # describe "custom methods" do
-  #   # it "totals user votes" do
-  #   #   vote_total = total_votes(@user.id)
-  #   #   expect(vote_total).must_equal 2
-  #   # end
-  # end
 end
