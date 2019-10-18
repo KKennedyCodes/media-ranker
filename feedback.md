@@ -8,7 +8,7 @@
 Workflow | yes / no
 --- | ---
 Deployed to Heroku | 
-Look and feel is similar to the original (consider styling and layout) | 
+Optional: Look and feel is similar to the original (consider styling and layout) | 
 **Before logging in** |
 On index page, there are at most 10 pieces of media on three lists, and a Media Spotlight | 
 Can go into a work's show page | 
