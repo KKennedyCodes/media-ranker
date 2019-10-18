@@ -19,13 +19,13 @@ Verify unable to create a new work when the form is empty, and details about the
 Can create a new work successfully. Note the URL for this work's show page | 
 Can delete this work successfully |
 Going back to the URL of this deleted work's show page produces a 404 or some redirect behavior (and does not try to produce a broken view) | 
-Verify that the "View all users" page lists no users | 
+Verify that the "View all users" page lists no users (except what is produced by db seeding) | 
 **Log in** | 
 Logging in with a valid name changes the UI to "Logged in as" and "Logout" buttons | 
 Your username is listed in "View all users" page | 
 Verify that number of votes determines the Media Spotlight | 
 Voting on several different pieces of media affects the "Votes" tables shown in the work's show page and the user's show page | 
-Voting on the same work twice produces an error and flash message, and there is no extra vote | 
+Voting on the same work twice produces an error/flash message, and there is no extra vote | 
 **Log out** |
 Logging out showed a flash message and changed the UI | 
 Logging in as a new user creates a new user | 
