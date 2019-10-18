@@ -1,26 +1,22 @@
 pill:
-  id: 1
   category: album
   title: Jagged Little Pill
   creator: Alanis Morisette
   publication_year: 1995
   description: Jagged Little Pill is the third studio album, and international debut, by Canadian singer Alanis Morissette, released on June 13, 1995, through Maverick. It was her first album to be released worldwide as her first two albums were released only in Canada.
 peppers:
-  id: 2
   category: album
   title: Greatest Hits
   creator: Red Hot Chili Peppers
   publication_year: 2003
   description: Greatest Hits is the second compilation album by the Red Hot Chili Peppers. It was released on November 18, 2003 by Warner Bros. Records. Aside from their cover of "Higher Ground", all songs on the compilation are from their tenure on Warner Bros. Records from 1991 to 2002, in addition to two newly recorded songs.
 dresses:
-  id: 3
   category: movie
   title: 27 Dresses
   creator: Anne Fletcher
   publication_year: 2008
   description: Perennial bridesmaid Jane (Katherine Heigl) always puts the needs of others before her own, making her the go-to gal whenever someone needs help with wedding plans. So when Jane's younger sister Tess (Malin Akerman) snags the man (Edward Burns) Jane secretly loves, Jane finds herself questioning her role as a wedding junkie for the first time in her life. Meanwhile, a handsome reporter (James Marsden) sees Jane's unusual story as his ticket off the bridal beat.
 kondo:
-  id: 4
   category: book
   title: The Life-Changing Magic of Tidying Up
   creator: Marie Kondo

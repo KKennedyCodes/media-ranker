@@ -62,12 +62,12 @@ describe Work do
     
     it "sorts the works by category" do
       expect(Work.top_ten("album").count).must_equal 2
-      expect((Work.top_ten("album").first).id).must_equal 1
-      expect((Work.top_ten("album").last).id).must_equal 2
+      expect((Work.top_ten("album").first)).must_equal works(:pill)
+      expect((Work.top_ten("album").last)).must_equal works(:peppers)
     end
     
     it "can find the top votes spotlight work" do
-      expect((Work.spotlight).id).must_equal 1
+      expect((Work.spotlight)).must_equal works(:pill)
     end
     
   end

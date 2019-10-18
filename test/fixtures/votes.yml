@@ -1,20 +1,16 @@
 pill_vote:
-  id: 1
-  user_id: 1
-  work_id: 1
+  user: :kennedy
+  work: :pill
   date: Time.now
 pill_vote2:
-  id: 4
-  user_id: 2
-  work_id: 1
+  user: :gaga
+  work: :pill
   date: Time.now
 peppers_vote:
-  id: 2
-  user_id: 1
-  work_id: 2
+  user: :kennedy
+  work: :peppers
   date: Time.now
 dresses_vote:
-  id: 3
-  user_id: 2
-  work_id: 3
+  user: :gaga
+  work: :peppers
   date: Time.now

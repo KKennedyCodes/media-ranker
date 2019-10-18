@@ -1,4 +1,5 @@
 require "test_helper"
+require "pry"
 
 describe Vote do
   before do
@@ -11,6 +12,7 @@ describe Vote do
     
     @vote = votes(:pill_vote)
     @votes = votes(:pill_vote, :pill_vote2, :peppers_vote, :dresses_vote)
+    #binding.pry
   end
   
   describe "instantiations" do
@@ -36,6 +38,7 @@ describe Vote do
   
   describe "relations" do
     it "can relate work_id and user_id to vote" do
+      expect(@vote.work).must_be_instance_of Work
       expect(@vote.work_id).must_equal @work.id
       expect(@vote.user_id).must_equal @user.id
       

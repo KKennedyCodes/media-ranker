@@ -34,7 +34,7 @@ describe User do
   
   describe "custom methods" do
     it "returns total upvotes contributed by user" do
-      expect(@user.total_votes(@user.id)).must_equal 2
+      expect(@user.total_votes(@user)).must_equal 2
       expect(@user2.total_votes(@user2.id)).must_equal 0
     end
   end
