@@ -85,3 +85,6 @@ group :test do
   gem 'minitest-rails'
   gem 'minitest-reporters'
 end
+
+gem "omniauth"
+gem "omniauth-github"
