@@ -13,7 +13,7 @@
     <section class="header_image">
   <nav class="nav loginout">
   <% if session[:user_id].nil? %>
-      <%= link_to "Login", login_path %>
+      <%= link_to("Login with GitHub", github_login_path) %>
     <% else %>
     <% user = User.find(session[:user_id])%>
     <section class="login_info">

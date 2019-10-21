@@ -47,13 +47,29 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.new(user_params)
-    if @user.save
-      redirect_to users_path
-      return 
-    else 
-      render :new
+    
+    auth_hash = request.env["omniauth.auth"]
+    raise
+    
+    auth_hash = request.env["omniauth.auth"]
+    user = User.find_by(uid: auth_hash[:uid], provider: "github")
+    if user
+      # User was found in the database
+      flash[:success] = "Logged in as returning user #{user.name}"
+    else
+      @user = User.new(uid: auth_hash["uid"], name: auth_hash["info"]["name"], provider: "GitHub", email: auth_hash["info"]["email"])
     end
+    
+    session[:user_id] = user.id
+    redirect_to root_path
+    
+    # @user = User.new(user_params)
+    # if @user.save
+    #   redirect_to users_path
+    #   return 
+    # else 
+    #   render :new
+    # end
   end
   
   def edit; end
@@ -76,7 +92,7 @@ class UsersController < ApplicationController
   private
   
   def user_params
-    return params.require(:user).permit(:id, :name, :join_date)
+    return params.require(:user).permit(:id, :name, :join_date, :uid, :provider, :email)
   end
   
   def find_user
