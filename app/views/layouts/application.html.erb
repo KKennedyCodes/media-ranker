@@ -13,8 +13,12 @@
     <section class="header_image">
   <nav class="nav loginout">
     <% if session[:user_id] %>
-    <% @current_user = User.find_by(id: session[:user_id]) %>%
-    <h5>Logged in as <%= @current_user.name %></h5>
+    <% @current_user = User.find_by(id: session[:user_id]) %>
+    <% if @current_user.name != nil %>
+      <h5>Logged in as <%= @current_user.name %></h5>      
+    <% else %>
+      <h5>Logged in as User ID: <%= @current_user.id %></h5> 
+    <% end %>
     <%= link_to "Log out", logout_path, method: "delete" %>
     <% else %>
       <%= link_to "Login with Github", github_login_path %>
