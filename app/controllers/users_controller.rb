@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :find_user, only: [:show, :edit, :update]
-  before_action :user_not_found, only: [:show, :edit, :destroy]
+  before_action :user_not_found, only: [:show, :edit]#, :destroy]
+  
   
   def index
     @users = User.all
@@ -15,6 +16,7 @@ class UsersController < ApplicationController
   def login
     name = params[:user][:name]
     user = User.find_by(name: name)
+    
     if user
       session[:user_id] = user.id
       flash[:success] = "Successfully logged in as returning user #{name}"
@@ -37,7 +39,7 @@ class UsersController < ApplicationController
   
   def logout
     session[:user_id] = nil
-    flash[:success] = "Successfully Logged Out"
+    flash[:success] = "Successfully logged out!"
     
     redirect_to root_path
   end
@@ -47,29 +49,33 @@ class UsersController < ApplicationController
   end
   
   def create
-    
     auth_hash = request.env["omniauth.auth"]
-    raise
     
-    auth_hash = request.env["omniauth.auth"]
     user = User.find_by(uid: auth_hash[:uid], provider: "github")
     if user
       # User was found in the database
       flash[:success] = "Logged in as returning user #{user.name}"
     else
-      @user = User.new(uid: auth_hash["uid"], name: auth_hash["info"]["name"], provider: "GitHub", email: auth_hash["info"]["email"])
+      # User doesn't match anything in the DB
+      # Attempt to create a new user
+      user = User.build_from_github(auth_hash)
+      
+      if user.save
+        flash[:success] = "Logged in as new user #{user.name}"
+      else
+        # Couldn't save the user for some reason. If we
+        # hit this it probably means there's a bug with the
+        # way we've configured GitHub. Our strategy will
+        # be to display error messages to make future
+        # debugging easier.
+        flash[:error] = "Could not create new user account: #{user.errors.messages}"
+        return redirect_to root_path
+      end
     end
     
+    # If we get here, we have a valid user instance
     session[:user_id] = user.id
-    redirect_to root_path
-    
-    # @user = User.new(user_params)
-    # if @user.save
-    #   redirect_to users_path
-    #   return 
-    # else 
-    #   render :new
-    # end
+    return redirect_to root_path
   end
   
   def edit; end
@@ -84,9 +90,10 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    @user.destroy
-    redirect_to users_path
-    return
+    session[:user_id] = nil
+    flash[:success] = "Successfully logged out!"
+    
+    redirect_to root_path
   end
   
   private
@@ -106,4 +113,7 @@ class UsersController < ApplicationController
       return
     end
   end
+  
+  
+  
 end

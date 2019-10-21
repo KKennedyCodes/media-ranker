@@ -12,15 +12,13 @@
   </head>
     <section class="header_image">
   <nav class="nav loginout">
-  <% if session[:user_id].nil? %>
-      <%= link_to("Login with GitHub", github_login_path) %>
+    <% if session[:user_id] %>
+    <% @current_user = User.find_by(id: session[:user_id]) %>%
+    <h5>Logged in as <%= @current_user.name %></h5>
+    <%= link_to "Log out", logout_path, method: "delete" %>
     <% else %>
-    <% user = User.find(session[:user_id])%>
-    <section class="login_info">
-      <h5>Logged in as <%= user.name %></h5>
-    </section>
-      <%= link_to "Logout", logout_path, method: :post%>
-    <% end %>
+      <%= link_to "Login with Github", github_login_path %>
+   <% end %>
   </nav>
     <header>
     <h1>Media Ranker</h1>
