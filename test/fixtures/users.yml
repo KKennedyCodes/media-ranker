@@ -1,9 +1,18 @@
 kennedy:
   name: Katie Kennedy
   join_date: Time.now
+  provider: github
+  uid: 12345
+  email: ada@adadevelopersacademy.org
 gaga:
   name: Lady Gaga
   join_date: Time.now
+  provider: github
+  uid: 13371337
+  email: grace@hooper.net
 oprah:
   name: Oprah Winfrey
   join_date: Time.now
+  provider: github
+  uid: 543210
+  email: oprah@adadevelopersacademy.org
