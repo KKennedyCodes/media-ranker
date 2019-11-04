@@ -89,3 +89,4 @@ end
 
 gem "omniauth"
 gem "omniauth-github"
+gem "validate_url"
