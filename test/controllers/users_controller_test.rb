@@ -84,7 +84,7 @@ describe UsersController do
         user = User.new(provider: "github", uid: 99999, name: "test_user", email: "test@user.com", join_date: Time.now)
         OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(user))
         get auth_callback_path
-        #must_redirect_to user_path(user.id)
+        must_redirect_to user_path(user.id)
         User.count.must_equal start_count + 1
         session[:user_id].must_equal User.last.id 
         

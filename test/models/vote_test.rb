@@ -42,7 +42,7 @@ describe Vote do
       expect(@vote.work_id).must_equal @work.id
       expect(@vote.user_id).must_equal @user.id
       
-      user = User.create!(name: "Tom Brady", join_date: Time.now)
+      user = User.create!(name: "Tom Brady", email: "Test@gmail.com", uid: 98767, join_date: Time.now)
       work = Work.create!(category: "book", title: "Where the Sidewalk Ends", creator: "Shel Silverstein", publication_year: 1992)
       vote = Vote.create!(work_id: work.id, user_id: user.id, date: Time.now)
       
