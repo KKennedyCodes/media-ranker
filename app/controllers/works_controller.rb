@@ -1,10 +1,15 @@
 class WorksController < ApplicationController
-  
+  before_action :find_user_session
   before_action :find_work, only: [:show, :edit, :update]
   before_action :work_not_found, only: [:show, :edit, :destroy]
   
-  def index
-    @works = Work.all
+  def index 
+    if session[:user_id] != nil
+      @works = Work.all
+    else
+      flash[:error] = "You must be logged in to see this page."
+      redirect_to root_path
+    end
   end
   
   def show;  end
@@ -66,6 +71,13 @@ class WorksController < ApplicationController
       flash[:error] = "Work with ID: #{params[:id]} was not found."
       redirect_to root_path
       return
+    end
+  end
+  
+  def find_user_session
+    if session[:user_id] == nil
+      flash[:error] = "You must be logged in to see this page."
+      redirect_to root_path
     end
   end
 end
