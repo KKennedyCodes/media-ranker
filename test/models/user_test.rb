@@ -13,6 +13,12 @@ describe User do
       # Assert
       expect(@user.valid?).must_equal true
     end
+    
+    it "will have the required fields" do
+      [:name, :uid, :email, :join_date, :provider].each do |field|
+        expect(@user).must_respond_to field
+      end
+    end
   end
   
   describe "validations" do

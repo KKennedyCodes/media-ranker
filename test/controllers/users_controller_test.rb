@@ -1,59 +1,113 @@
 require "test_helper"
 
 describe UsersController do
-  before do
-    User.create!(name: "Jojo Siwa")
-  end
-  
-  describe "current action" do
-    it "sets session[:user_id], redirects, and responds with success" do
-      
-      perform_login
-      
-      get current_user_path
-      
+  describe "guest user (not authenticated)" do
+    it "should show homepage" do
+      get root_path 
+      must_respond_with :success
+    end
+    
+    it "redirects to root path when user is not logged in" do
+      get works_path
+      expect(flash[:error]).must_equal "You must be logged in to see this page."
       must_respond_with :redirect
-    end
-    
-    it "sets flash[:error] and redirects when there's no user" do
-      get current_user_path
+      must_redirect_to root_path
       
-      expect(flash[:error]).must_equal "User with ID: current was not found."
+      get new_work_path
+      expect(flash[:error]).must_equal "You must be logged in to see this page."
+      must_respond_with :redirect
+      must_redirect_to root_path
+      
+      get edit_work_path(Work.first.id)
+      expect(flash[:error]).must_equal "You must be logged in to see this page."
+      must_respond_with :redirect
       must_redirect_to root_path
     end
   end
   
-  describe "auth_callback" do
-    it "logs in an existing user and redirects to the root route" do
-      # Count the users, to make sure we're not (for example) creating
-      # a new user every time we get a login request
-      start_count = User.count
-      
-      # Get a user from the fixtures
-      user = users(:grace)
-      
-      # Tell OmniAuth to use this user's info when it sees
-      # an auth callback from github
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(user))
-      
-      # Send a login request for that user
-      # Note that we're using the named path for the callback, as defined
-      # in the `as:` clause in `config/routes.rb`
-      get auth_callback_path(:github)
-      
-      must_redirect_to root_path
-      
-      # Since we can read the session, check that the user ID was set as expected
-      session[:user_id].must_equal user.id
-      
-      # Should *not* have created a new user
-      User.count.must_equal start_count
+  describe "authenticated user" do
+    before do
+      user = users(:kennedy)
+      perform_login(user)
     end
     
-    it "creates an account for a new user and redirects to the root route" do
+    describe "current action" do
+      it "sets session[:user_id], redirects, and responds with success" do
+        perform_login
+        get current_user_path
+        must_respond_with :redirect
+      end
+      
+      it "sets flash[:error] and redirects when there's no user" do
+        get current_user_path
+        must_respond_with :redirect
+      end
     end
     
-    it "redirects to the login route if given invalid user data" do
+    
+    describe "dashboard" do
+      it "shows dashboard for user that is logged in" do
+        user = users(:kennedy)
+        perform_login(user)
+        get user_path(user.id)
+        must_respond_with :success
+      end
+    end
+    
+    describe "logout" do
+      it "successfully logs out current user" do
+        expect(session[:user_id].nil?).must_equal false
+        
+        delete logout_path
+        
+        assert_nil(session[:user_id])
+        expect(flash[:success]).must_equal "Successfully logged out!"
+        
+        must_respond_with :redirect
+        must_redirect_to root_path
+      end
+    end
+    
+    describe "auth_callback" do
+      it "logs in an existing user and redirects" do
+        start_count = User.count
+        user = users(:kennedy)
+        OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(user))
+        get auth_callback_path
+        must_redirect_to user_path(user.id)
+        session[:user_id].must_equal user.id
+        User.count.must_equal start_count
+      end
+      
+      it "creates an account for a new user and redirects to the root route" do
+        start_count = User.count
+        user = User.new(provider: "github", uid: 99999, name: "test_user", email: "test@user.com", join_date: Time.now)
+        OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(user))
+        get auth_callback_path
+        #must_redirect_to user_path(user.id)
+        User.count.must_equal start_count + 1
+        session[:user_id].must_equal User.last.id 
+        
+        # start_count = User.count
+        # new_user = User.new(provider: "github", uid: 99999, name: "test_user", email: "test@user.com", join_date: Time.now)
+        # expect{ 
+        #   perform_login(new_user) 
+        # }.must_differ "User.count", 1
+        # expect(User.find_by(id: session[:user_id])).must_equal User.all.last
+        # must_respond_with :redirect
+        # must_redirect_to user_path(user.id)
+      end
+      
+      it "redirects to the login route if given invalid user data" do
+        start_count = User.count
+        user = User.new(provider: "github", uid: 99999, join_date: Time.now)
+        OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(user))
+        get auth_callback_path
+        must_redirect_to root_path
+        User.count.must_equal start_count
+        session[:user_id].must_equal nil
+      end
     end
   end
 end
+

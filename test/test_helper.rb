@@ -5,12 +5,14 @@ require 'minitest/rails'
 require 'minitest/autorun'
 require 'minitest/reporters'
 
+Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
+
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
   
   def setup
-    OmniAuth.config_test_mode = true
+    OmniAuth.config.test_mode = true
   end
   
   def mock_auth_hash(user)
@@ -19,28 +21,20 @@ class ActiveSupport::TestCase
       uid: user.uid,
       info: {
         email: user.email,
-        name: user.name
+        name: user.name,
+        join_date: user.join_date
       }
     }
   end
   
-  # Add more helper methods to be used by all tests here...
   def perform_login(user = nil)
     user ||= User.first
     
-    login_data = {
-      user: {
-        name: user.name,
-      },
-    }
+    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(user))
     
-    post login_path, params: login_data
-    
-    expect(session[:user_id]).must_equal user.id
+    get auth_callback_path
     
     return user
   end
-  
-  
   
 end
