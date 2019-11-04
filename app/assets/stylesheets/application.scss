@@ -85,6 +85,7 @@ h1 {
 
 h5{
     background-color: #ec9b3b;
+    text-align: center;
     border-radius: 45px;
     color: white;
     padding-left: 20px;
@@ -93,6 +94,10 @@ h5{
 
 .loginout {
     text-align: right;
+
+    display: grid;
+    grid-template-columns: 1.5fr 4fr 1fr;
+    align-items: end;
 }
 
 

@@ -18,6 +18,8 @@ class UsersController < ApplicationController
     
     if user
       flash[:success] = "Logged in as returning user #{user.name}"
+      session[:user_id] = user.id
+      return redirect_to user_path(user.id)
     else
       user = User.build_from_github(auth_hash)
       

@@ -19,9 +19,11 @@
     <% else %>
       <h5>Logged in as User ID: <%= @current_user.id %></h5> 
     <% end %>
-
+    <%= link_to "My Dashboard", user_path(@current_user.id) %>
     <%= link_to "Log out", logout_path, method: "delete" %>
     <% else %>
+      <p></p>
+      <p></p>
       <%= link_to "Login with GitHub", github_login_path %>
    <% end %>
   </nav>
